@@ -1,10 +1,5 @@
 # Stacking Sats on Kraken
 
-First off: Here's to you, [Bittr](https://getbittr.com/) – you will be missed! 😢
-
-This script is not a full replacement for the incredible service Bittr offered, but it's a start:
-Automate your Stacking Sats process by regularly placing buy orders using the [Kraken API](https://www.kraken.com/features/api).
-
 ## ✋ Caveat
 
 You need to install the dependency [kraken-api](https://github.com/nothingisdead/npm-kraken-api), which is a third-party package.
@@ -34,6 +29,7 @@ KRAKEN_API_SECRET="privateKeyFromTheKrakenSettings"
 
 # used for buying
 KRAKEN_API_FIAT="USD" # the governmental shitcoin you are selling
+BUY_CRYPTO="XBT" # what you are buying
 KRAKEN_BUY_AMOUNT=21 # fiat amount you trade for the future of money
 
 # used for withdrawal
@@ -43,52 +39,7 @@ KRAKEN_WITHDRAW_KEY="descriptionOfWithdrawalAddress"
 # remove this line after verifying everything works
 KRAKEN_DRY_RUN_PLACE_NO_ORDER=1
 ```
-
-## ⚡️ RaspiBlitz Integration
-
-This script ships with the [RaspiBlitz](https://github.com/rootzoll/raspiblitz) (v1.6 and above).
-
-You can enable it via the Console of your RaspiBlitz.
-Leave the main menu via the last option "Console" and use the following commands:
-
-```sh
-# enable the script
-./config.scripts/bonus.stacking-sats-kraken.sh on
-
-# switch to the stackingsats user
-sudo su - stackingsats
-
-# edit your configuration (see the "Configuration" section above)
-nano /mnt/hdd/app-data/stacking-sats-kraken/.env
-
-# follow the instructions from the first step to set up a cronjob
-crontab -e
-```
-
-Here is an example for a daily cronjob at 6:15am ...
-
-```sh
-SHELL=/bin/bash
-PATH=/bin:/usr/sbin:/usr/bin:/usr/local/bin
-15 6 * * * /home/stackingsats/stacking-sats-kraken/stacksats.sh > /dev/null 2>&1
-```
-
-**Note:** Do not run `npm` directly on the RaspiBlitz, like show in the examples below.
-Please use the `/home/stackingsats/stacking-sats-kraken/stacksats.sh` shell script instead, as this loads your configuration.
-
-To run the script manually, switch to the `stackingsats` user and use this command:
-
-```sh
-# switch to the stackingsats user
-sudo su - stackingsats
-
-# run the script
-./stacking-sats-kraken/stacksats.sh
-```
-
-- - -
-
-## 📦 Custom Setup
+## 📦 Setup
 
 Prerequisite: At least the current LTS version of [Node.js](https://nodejs.org/).
 
@@ -138,8 +89,9 @@ set -e
 
 export KRAKEN_API_KEY="apiKeyFromTheKrakenSettings"
 export KRAKEN_API_SECRET="privateKeyFromTheKrakenSettings"
-export KRAKEN_API_FIAT="USD"
-export KRAKEN_BUY_AMOUNT=21
+export BUY_CRYPTO="XBT"
+export KRAKEN_API_FIAT="EUR"
+export KRAKEN_BUY_AMOUNT=10
 export KRAKEN_MAX_REL_FEE=0.5
 export KRAKEN_WITHDRAW_KEY="descriptionOfWithdrawalAddress"
 export KRAKEN_DRY_RUN_PLACE_NO_ORDER=1
@@ -164,7 +116,15 @@ To: $recipient $result" | /usr/sbin/sendmail $recipient
 
 Make it executable with `chmod +x stacksats.sh` and go wild.
 
-[Stay humble!](https://twitter.com/matt_odell/status/1117222441867194374) 🙏
+Here is an example for a daily cronjob at 6:15am ...
+
+```sh
+15 6 * * * /home/stackingsats/stacking-sats-kraken/stacksats.sh > /dev/null 2>&1
+```
+
+To run the script manually, use this command:
+
+./stacking-sats-kraken/stacksats.sh
 
 ## 🔑 Withdrawal
 
