@@ -1,8 +1,7 @@
 module.exports = async (kraken, validate, getEnv) => {
-  const [maxFee, key] = getEnv('KRAKEN_MAX_REL_FEE', 'KRAKEN_WITHDRAW_KEY')
+  const [asset, maxFee, key] = getEnv('ASSET', 'KRAKEN_MAX_REL_FEE', 'KRAKEN_WITHDRAW_KEY')
 
   // https://api.kraken.com/0/private/WithdrawInfo
-  const asset = 'XBT'
   const withdrawdetails = { asset, key, amount: 0 }
 
   // Get withdrawal information
