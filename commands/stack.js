@@ -1,5 +1,5 @@
 module.exports = async (kraken, validate, getEnv) => {
-  const [crypto, fiat, amount] = getEnv('BUY_CRYPTO', 'KRAKEN_API_FIAT', 'KRAKEN_BUY_AMOUNT')
+  const [crypto, fiat, amount] = getEnv('ASSET', 'KRAKEN_API_FIAT', 'KRAKEN_BUY_AMOUNT')
 
   // https://www.kraken.com/features/api
   const pair = `${crypto}${fiat}`
