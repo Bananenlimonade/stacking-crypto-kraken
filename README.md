@@ -29,7 +29,7 @@ KRAKEN_API_SECRET="privateKeyFromTheKrakenSettings"
 
 # used for buying
 KRAKEN_API_FIAT="USD" # the governmental shitcoin you are selling
-BUY_CRYPTO="XBT" # what you are buying
+ASSET="XBT" # what you are buying
 KRAKEN_BUY_AMOUNT=21 # fiat amount you trade for the future of money
 
 # used for withdrawal
@@ -89,7 +89,7 @@ set -e
 
 export KRAKEN_API_KEY="apiKeyFromTheKrakenSettings"
 export KRAKEN_API_SECRET="privateKeyFromTheKrakenSettings"
-export BUY_CRYPTO="XBT"
+export ASSET="XBT"
 export KRAKEN_API_FIAT="EUR"
 export KRAKEN_BUY_AMOUNT=10
 export KRAKEN_MAX_REL_FEE=0.5
