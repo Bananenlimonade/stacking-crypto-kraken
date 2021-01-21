@@ -1,5 +1,9 @@
 # Stacking Cryptos on Kraken
 
+Use this script to automate stacking any coin by regularly placing buy orders using the [Kraken API](https://www.kraken.com/features/api).
+
+This project has been forked from [dennisreimann](https://github.com/dennisreimann/stacking-sats-kraken). I have added some enhancements to be able to stack not only bitcoin but also other coins.
+
 ## ✋ Caveat
 
 You need to install the dependency [kraken-api](https://github.com/nothingisdead/npm-kraken-api), which is a third-party package.
