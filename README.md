@@ -126,6 +126,58 @@ To run the script manually, use this command:
 
 ./stacking-sats-kraken/stacksats.sh
 
+Here's another example `stacksats.sh` script with command line args. Use it if you want to stack several coins and have only have one script:
+
+```sh
+#!/bin/bash
+set -e
+
+export KRAKEN_API_KEY="apiKeyFromTheKrakenSettings"
+export KRAKEN_API_SECRET="privateKeyFromTheKrakenSettings"
+export KRAKEN_API_FIAT="EUR"
+export ASSET="$1"
+export KRAKEN_BUY_AMOUNT=$2
+export KRAKEN_MAX_REL_FEE=0.5
+export KRAKEN_WITHDRAW_KEY="$4"
+export KRAKEN_DRY_RUN_PLACE_NO_ORDER=1
+
+# run script
+cd $(cd `dirname $0` && pwd)
+cmd=${5:-"stack"}
+
+if [[ "${KRAKEN_DRY_RUN_PLACE_NO_ORDER}" ]]; then
+  result=$(npm run test:$cmd --silent 2>&1)
+else
+  result=$(npm run $cmd --silent 2>&1)
+fi
+echo "$result"
+
+if [ "$3" = "withdraw" ]; then
+	npm run withdraw
+else
+	echo 
+	echo "no withdraw requested"
+fi
+
+# optional: send yourself an email
+recipient="satstacker@example.org"
+echo "Subject: Sats got stacked
+From: satstacker@example.org
+To: $recipient $result" | /usr/sbin/sendmail $recipient
+```
+
+Make it executable with `chmod +x stacksats.sh` and go wild.
+
+Here is an example for a daily cronjob at 6:15am ...
+
+```sh
+15 6 * * * /home/stackingsats/stacking-sats-kraken/stacksats.sh XBT 10 withdraw descriptionOfWithdrawalAddress > /dev/null 2>&1
+```
+
+To run the script manually, use this command:
+
+./stacking-sats-kraken/stacksats.sh XBT 10 withdraw descriptionOfWithdrawalAddress
+
 ## 🔑 Withdrawal
 
 Holding significant amounts on an exchange is never a good idea.
