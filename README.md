@@ -160,7 +160,7 @@ if [ "$3" = "withdraw" ]; then
 	npm run withdraw
 else
 	echo 
-	echo "no withdraw requested"
+	echo "no withdrawal requested"
 fi
 
 # optional: send yourself an email
@@ -170,7 +170,7 @@ From: cryptostacker@example.org
 To: $recipient $result" | /usr/sbin/sendmail $recipient
 ```
 
-Make it executable with `chmod +x stackscrypto.sh` and go wild.
+Make it executable with `chmod +x stackcrypto.sh` and go wild.
 
 Here is an example for a daily cronjob at 6:15am ...
 
