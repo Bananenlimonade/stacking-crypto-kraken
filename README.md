@@ -1,4 +1,4 @@
-# Stacking Sats on Kraken
+# Stacking Cryptos on Kraken
 
 ## ✋ Caveat
 
@@ -70,7 +70,7 @@ You should see something like this sample output:
 📎 Transaction ID: 2121212121
 ```
 
-## 🤑 Stack sats
+## 🤑 Stack Cryptos
 
 When you are good to go, execute this command in a regular interval:
 
@@ -81,7 +81,7 @@ npm run stack
 The best and easiest way is to wrap it all up in a shell script.
 This script can be triggered via cron job, e.g. weekly, daily or hourly.
 
-Here's a sample `stacksats.sh` script:
+Here's a sample `stackcrypto.sh` script:
 
 ```sh
 #!/bin/bash
@@ -108,25 +108,25 @@ fi
 echo "$result"
 
 # optional: send yourself an email
-recipient="satstacker@example.org"
-echo "Subject: Sats got stacked
-From: satstacker@example.org
+recipient="cryptostacker@example.org"
+echo "Subject: Cryptos got stacked
+From: cryptostacker@example.org
 To: $recipient $result" | /usr/sbin/sendmail $recipient
 ```
 
-Make it executable with `chmod +x stacksats.sh` and go wild.
+Make it executable with `chmod +x stackcrypto.sh` and go wild.
 
 Here is an example for a daily cronjob at 6:15am ...
 
 ```sh
-15 6 * * * /home/stackingsats/stacking-sats-kraken/stacksats.sh > /dev/null 2>&1
+15 6 * * * /home/stackingcrypto/stacking-crypto-kraken/stackcrypto.sh > /dev/null 2>&1
 ```
 
 To run the script manually, use this command:
 
-./stacking-sats-kraken/stacksats.sh
+./stacking-crypto-kraken/stackcrypto.sh
 
-Here's another example `stacksats.sh` script with command line args. Use it if you want to stack several coins and have only have one script:
+Here's another example `stackcrypto.sh` script with command line args. Use it if you want to stack several coins and have only have one script:
 
 ```sh
 #!/bin/bash
@@ -160,23 +160,23 @@ else
 fi
 
 # optional: send yourself an email
-recipient="satstacker@example.org"
-echo "Subject: Sats got stacked
-From: satstacker@example.org
+recipient="cryptostacker@example.org"
+echo "Subject: Cryptos got stacked
+From: cryptostacker@example.org
 To: $recipient $result" | /usr/sbin/sendmail $recipient
 ```
 
-Make it executable with `chmod +x stacksats.sh` and go wild.
+Make it executable with `chmod +x stackscrypto.sh` and go wild.
 
 Here is an example for a daily cronjob at 6:15am ...
 
 ```sh
-15 6 * * * /home/stackingsats/stacking-sats-kraken/stacksats.sh XBT 10 withdraw descriptionOfWithdrawalAddress > /dev/null 2>&1
+15 6 * * * /home/stackingcrypto/stacking-crypto-kraken/stackcrypto.sh XBT 10 withdraw descriptionOfWithdrawalAddress > /dev/null 2>&1
 ```
 
 To run the script manually, use this command:
 
-./stacking-sats-kraken/stacksats.sh XBT 10 withdraw descriptionOfWithdrawalAddress
+./stacking-crypto-kraken/stackcrypto.sh XBT 10 withdraw descriptionOfWithdrawalAddress
 
 ## 🔑 Withdrawal
 
@@ -219,7 +219,7 @@ You should see something like this:
 ❌  Fee is too high – max rel. fee: 0.50%
 ```
 
-It is recommended to run the withdrawal script every time you stacked sats:
+It is recommended to run the withdrawal script every time you stacked a crypto:
 
 ```sh
 npm run withdraw
@@ -228,5 +228,5 @@ npm run withdraw
 Since it can take a couple seconds or minutes for your order to fill, you should run the following script a couple hours later after the stacking script.
 Just set up a second cron job which executes the withdrawal script.
 
-If you are using the aforementioned `stacksats.sh` script you can withdraw via this command:
-`stacksats.sh withdraw`
+If you are using the aforementioned `stackcrypto.sh` script you can withdraw via this command:
+`stackcrypto.sh withdraw`
